@@ -1,0 +1,3 @@
+1) Fix WHERE for database to support variety of sortings with multiple sorts
+2) multiple gets for projects with Filters
+3) develop filter class which will be responsible for providing data
