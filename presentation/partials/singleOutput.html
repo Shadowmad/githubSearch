@@ -1,5 +1,24 @@
-<div ng-repeat="data in messages">
-    <p>{{data.name}}</p>
-    <p>{{data.url}}</p>
-
+<div class="mainWrapper">
+  <div ng-repeat="data in messages" class="overallInfo">
+    <div class="pName">
+      <h2>
+        {{data.projectName}}
+      </h2>
+    </div>
+    <div class="addInfo">
+      <div class="mainInfo">
+        <p>
+          The project {{data.projectName}} has been creted in {{data.projectCreated}}. From that time it has been updated regurarly and the latest update was made on {{data.projectUpdated}}. It is quite popular between developers and as of today it has {{data.projectStars}} stars representing its popularity on gitHub.
+        </p>
+        <p>
+          Below you will find detailed view of this project with specific information and link to its source.
+        </p>
+        <div class="fullInfo">
+          <div class="imageDiv">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

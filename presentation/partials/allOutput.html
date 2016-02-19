@@ -1,4 +1,21 @@
-<div ng-repeat="data in messages">
-    <p>{{data.projectID}}</p>
-
+<div class="mainWrapper">
+  <table>
+    <tr ng-repeat="data in messages">
+      <td>
+        {{data.projectName}}
+      </td>
+      <td>
+        {{data.projectStars}}
+      </td>
+      <td>
+        {{data.projectLanguage}}
+      </td>
+      <td>
+        {{data.projectCreated}}
+      </td>
+      <td>
+        <a href="#/repo/{{data.projectID}}">Click here for Full Information</a>
+      </td>
+    </tr>
+  </table>
 </div>
