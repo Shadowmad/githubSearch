@@ -1,17 +1,99 @@
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.min.css">
+<style>
+  .noneDisplay{
+    display: none;
+  }
+  .visible{
+    display: block;
+  }
+</style>
+<!-- JS -->
+
+
+
+<!-- Code -->
+<script  type="text/javascript">
+$('#sandbox-container .input-daterange,#sandbox-container1 .input-daterange,#sandbox-container2 .input-daterange').datepicker({
+    format: "yyyy/mm/dd",
+    endDate: "+Today",
+    autoclose: true,
+    todayHighlight: true
+});
+
+  $("#selectDatesFields").on("change", function(){
+    var q = this.value;
+    $(".visible").removeClass("visible");
+    switch (q) {
+      case "beforeDates":
+        $("#sandbox-container2").addClass("visible");
+        //$("#sandbox-container").removeClass("noneDisplay");
+        break;
+      case "afterDates":
+        $("#sandbox-container1").addClass("visible");
+        break;
+      case "betweenDates":
+        $("#sandbox-container").addClass("visible");
+        break;
+      default:
+
+    }
+  });
+</script>
 <div class="searchAll">
+  <form ng-submit = "processForm()">
+      <div class="filterField sliderStars">
+        <rzslider ng-model = "filterData.slider" id="starFilter" name="starsFilter"
+          rz-slider-model="slider.min"
+          rz-slider-high="slider.max"
+          rz-slider-options="slider.options">
+        </rzslider>
+      </div>
 
-    <div class="filterField sliderStars">
-      <rzslider
-        rz-slider-model="slider.min"
-        rz-slider-high="slider.max"
-        rz-slider-options="slider.options">
-      </rzslider>
-    </div>
-    <div class="filterField dataRange">
-        <label for="from">From</label>
-        <input class ="textbox" type="text" id="from" name="from">
-        <label for="to">to</label>
-        <input class ="textbox" type="text" id="to" name="to">
-    </div>
+      <select id="selectDatesFields">
+        <option value="allDates">
+          Select all dates
+        </option>
+        <option value="beforeDates">
+          Select dates before
+        </option>
+        <option value="afterDates">
+          Select dates after
+        </option>
+        <option value="betweenDates">
+          Select dates between
+        </option>
+      </select>
 
+      <div id="datapickerWrapper" class="divWrapper">
+        <div id="sandbox-container" class="datepickerClass rangeDate noneDisplay">
+          <div class="input-daterange input-group" id="datepicker">
+            <label class="input-group-addon" for="from">From Date</label>
+              <input ng-model="filterData.rangeFrom" type="text" class="input-sm form-control" id="from" name="fromDate" />
+            <label class="input-group-addon" for="to">To Date</label>
+              <input ng-model="filterData.rangeTo" type="text" class="input-sm form-control" id="to" name="toDate" />
+          </div>
+        </div>
+        <div id="sandbox-container1" class="datepickerClass afterDate noneDisplay">
+          <div class="input-daterange input-group" id="datepicker">
+            <label class="input-group-addon" for="from">After Date</label>
+              <input ng-model="filterData.singleFrom" type="text" class="form-control" id="from" name="fromDate" />
+          </div>
+        </div>
+        <div id="sandbox-container2" class="datepickerClass beforeDate noneDisplay">
+          <div class="input-daterange input-group" id="datepicker">
+            <label class="input-group-addon" for="from">Before Date</label>
+              <input ng-model="filterData.singleBefore" type="text" class="form-control" id="from" name="beforeDate" />
+          </div>
+        </div>
+      </div>
+
+      <div id="selectLangDiv">
+        <select id="selectLang">
+          <option value="all"> All Languages </option>
+          <option value="php"> PHP Language </option>
+        </select>
+      </div>
+
+  </form>
 </div>

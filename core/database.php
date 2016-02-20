@@ -50,7 +50,11 @@
       $queryString->execute();
       return $queryString;
     }
-
+    public function databaseDistinct($toRead, $tableName){
+      $queryString = $this->dbc->prepare("SELECT DISTINCT $toRead FROM $tableName");
+      $queryString->execute();
+      return ($queryString);
+    }
     private function databaseReadSelect($tableName,$dataToRead){
       $tempString = "";
       for($i = 0; $i < count($dataToRead); $i++){
