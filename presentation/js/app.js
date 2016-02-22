@@ -1,11 +1,11 @@
 // script.js
 
-    // create the module and name it scotchApp
+    // create the module and name it githubLocal
         // also include ngRoute for all our routing needs
-    var scotchApp = angular.module('scotchApp', ['ngRoute', 'rzModule']);
+    var githubLocal = angular.module('githubLocal', ['ngRoute', 'rzModule', 'ngMessages']);
 
     // configure our routes
-    scotchApp.config(function($routeProvider) {
+    githubLocal.config(function($routeProvider) {
         $routeProvider
             // route for the home page
             .when('/', {
@@ -22,6 +22,6 @@
             })
             .when('/notfound/',{
               templateUrl : '/presentation/partials/notfound.html',
-              controller  : '' 
+              controller  : ''
             })
     });

@@ -35,7 +35,7 @@
 
 
 <div class="searchAll">
-  <form class="container" ng-submit = "processForm()">
+  <form class="container" ng-submit = "processForm()" name="searchform" novalidate>
     <div class="row">
       <div class="col-xs-12 col-md-12 col-sm-2 personalSelector filterField sliderStars">
         <label class="input-group-addon" for="starFilter">Filter by stars</label>
@@ -56,8 +56,6 @@
         </select>
       </div>
     </div>
-
-
 
       <div id="datapickerWrapper" class="divWrapper">
 
@@ -86,17 +84,20 @@
       </div>
 
     <div class="row">
-      <div id="selectLangDiv" class="col-xs-12 col-md-12 col-sm-12 personalSelector input-group select">
+      <div id="selectLangDiv" class="col-xs-12 col-md-12 col-sm-12 personalSelector input-group select" ng-class="{ 'has-error': searchform.langSelect.$touched || searchform.langSelect.$invalid }">
         <label class="input-group-addon" for="selectDatesFields">
           Language to search
         </label>
-        <select id="selectLang" class="form-control" ng-model="filterData.selectLang" ng-options="x.value for x in itemsLangSelect track by x.name" ng-dropdown>
+        <select required id="selectLang" name="langSelect" class="form-control" ng-model="filterData.selectLang" ng-options="x.value for x in itemsLangSelect track by x.name" ng-dropdown>
           <option value="" selected="selected">Choose</option>
         </select>
       </div>
+      <div class="help-block" ng-messages="searchform.selectLang.$error" ng-if="searchForm.selectLang.$invalid">
+        <p ng-message="minlength">Selecting an option is required</p>
+      </div>
     </div>
       <!-- SUBMIT BUTTON -->
-      <button type="submit" class="btn btn-success btn-lg btn-block">
+      <button type="submit" ng-disabled="searchform.$invalid" class="btn btn-success btn-lg btn-block">
         <span class="glyphicon glyphicon-flash"></span> Submit!
       </button>
   </form>
@@ -112,12 +113,17 @@
   <div class="row personalSelector">
     <div class="col-xs-12 col-sm-12 col-md-12">
       <!-- Button trigger modal -->
-      <form ng-submit = "idSpecificSubmit()" role="form">
-        <div class="input-group">
+      <form ng-submit = "idSpecificSubmit()" novalidate name="idsearch" role="form">
+        <div class="input-group" ng-class="{ 'has-error': idsearch.idSpecific.$touched && idsearch.idSpecific.$invalid }">
           <label for="projectId" class="input-group-addon">Known ID</label>
-          <input type="text" ng-model="idSpecific" class="form-control" id="projectId" placeholder="Enter id" />
+          <input required type="number"
+                 ng-model="idSpecific" class="form-control" name="idsearchfield" id="projectId" placeholder="Enter id"
+                 min="1"/>
         </div>
-        <button type="submit"  class="btn-block btn btn-default personalSelector">Submit</button>
+        <div class="help-block" ng-messages="idsearch.idsearchfield.$error" ng-if="idsearch.idsearchfield.$invalid">
+          <p ng-message="minlength">Selecting an option is required</p>
+        </div>
+        <button type="submit" ng-disabled="idsearch.$invalid" class="btn-block btn btn-default personalSelector">Submit</button>
       </form>
     </div>
   </div>

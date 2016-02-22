@@ -1,5 +1,5 @@
 // create the controller and inject Angular's $scope
-scotchApp.controller('singleOutputController', function($scope,$http,$routeParams, $location) {
+githubLocal.controller('singleOutputController', function($scope,$http,$routeParams, $location) {
     $http.get("/controllers/singleIdController.php?id=" + $routeParams.id + "&single=true")
     .then(function(responce){
         if(responce.data.records == ""){
@@ -10,7 +10,7 @@ scotchApp.controller('singleOutputController', function($scope,$http,$routeParam
       });
 });
 
-scotchApp.controller('multipleOutputController', function($scope,$location,getFullListByFilter) {
+githubLocal.controller('multipleOutputController', function($scope,$location,getFullListByFilter) {
     /*$http.get("/controllers/multipleController.php?date")
     .then(function(responce){
       $scope.messages = responce.data.records;
@@ -28,7 +28,7 @@ scotchApp.controller('multipleOutputController', function($scope,$location,getFu
 
 });
 
-scotchApp.factory('getFilters', [function(){
+githubLocal.factory('getFilters', [function(){
   var getFiltersFactory = {};
   getFiltersFactory.data = '';
 
@@ -42,7 +42,7 @@ scotchApp.factory('getFilters', [function(){
   return getFiltersFactory;
 
 }]);
-scotchApp.factory('updateDataInDBFactory',['$http', function($http){
+githubLocal.factory('updateDataInDBFactory',['$http', function($http){
   var setupdateDataInDB = {};
   setupdateDataInDB.data = '';
   setupdateDataInDB.status = '';
@@ -55,7 +55,7 @@ scotchApp.factory('updateDataInDBFactory',['$http', function($http){
   }
   return setupdateDataInDB;
 }]);
-scotchApp.factory('getFullListByFilter', ['$http','getFilters', function($http, getFilters) {
+githubLocal.factory('getFullListByFilter', ['$http','getFilters', function($http, getFilters) {
   var getFullListByFilterFactory = {};
 
   getFullListByFilterFactory.data = '';
@@ -89,7 +89,7 @@ scotchApp.factory('getFullListByFilter', ['$http','getFilters', function($http, 
 }]);
 
 
-scotchApp.controller("filterController", function($scope,$location, getFilters,updateDataInDBFactory, getFullListByFilter){
+githubLocal.controller("filterController", function($scope,$location, getFilters,updateDataInDBFactory, getFullListByFilter){
   $scope.itemsDateSelect =  [
                               {name: 'beforeDates', value:'Select dates before'},
                               {name: 'afterDates', value:'Select dates after'},
