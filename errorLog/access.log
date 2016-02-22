@@ -12603,3 +12603,5 @@
 127.0.0.1 - - [22/Feb/2016:07:51:35 -0800] "GET /presentation/partials/allOutput.html HTTP/1.1" 200 575 "http://github.local/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
 127.0.0.1 - - [22/Feb/2016:07:51:36 -0800] "GET /presentation/partials/singleOutput.html HTTP/1.1" 200 879 "http://github.local/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
 127.0.0.1 - - [22/Feb/2016:07:51:37 -0800] "GET /controllers/singleIdController.php?id=702550&single=true HTTP/1.1" 200 492 "http://github.local/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+127.0.0.1 - - [22/Feb/2016:07:52:18 -0800] "GET / HTTP/1.1" 200 1253 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+127.0.0.1 - - [22/Feb/2016:07:52:18 -0800] "GET /presentation/partials/searchFilters.html HTTP/1.1" 200 2085 "http://github.local/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
