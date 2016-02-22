@@ -1,5 +1,19 @@
-<div class="mainWrapper">
-  <table>
+<div class="mainWrapper table-responsive">
+  <table class="table">
+    <tr>
+      <th>
+        Project Name
+      </th>
+      <th>
+        Project Stars
+      </th>
+      <th>
+        Language
+      </th>
+      <th>
+        Project link
+      </th>
+    </tr>
     <tr ng-repeat="data in messages">
       <td>
         {{data.projectName}}
@@ -8,13 +22,10 @@
         {{data.projectStars}}
       </td>
       <td>
-        {{data.projectLanguage}}
+        {{data.language}}
       </td>
       <td>
-        {{data.projectCreated}}
-      </td>
-      <td>
-        <a href="#/repo/{{data.projectID}}">Click here for Full Information</a>
+        <a class="btn btn-info" href="#/repo/{{data.projectID}}">Details</a>
       </td>
     </tr>
   </table>

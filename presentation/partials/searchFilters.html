@@ -1,5 +1,6 @@
 <!-- CSS -->
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.min.css">
+<link rel="stylesheet" type="text/css" href="/presentation/css/search.css">
 <style>
   .noneDisplay{
     display: none;
@@ -23,19 +24,40 @@
         });
     });
 </script>
-<div class="searchAll">
-  <form ng-submit = "processForm()">
-      <div class="filterField sliderStars">
 
+<div class="row">
+  <div class="col-xs-12 col-md-12 col-sm-12">
+      <p class="text-center">
+        Welcome to Github repository search. Below you can see filter search to walk trough various information in our database, or if you know specific ID of a project, you can click on a link below and iput in there.
+      </p>
+  </div>
+</div>
+
+
+<div class="searchAll">
+  <form class="container" ng-submit = "processForm()">
+    <div class="row">
+      <div class="col-xs-12 col-md-12 col-sm-2 personalSelector filterField sliderStars">
+        <label class="input-group-addon" for="starFilter">Filter by stars</label>
         <rzslider id="starFilter" name="starsFilter"
           rz-slider-model="filterData.slider.minValue"
           rz-slider-high="filterData.slider.maxValue"
           rz-slider-options="filterData.slider.options">
         </rzslider>
       </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-md-12 col-sm-12 personalSelector input-group select">
+        <label class="input-group-addon" for="selectDatesFields">
+          Date to search
+        </label>
+        <select id="selectDatesFields" class="form-control" ng-model="filterData.select" ng-options="x.value for x in itemsDateSelect track by x.name" ng-dropdown>
+          <option value="" selected="selected">All time</option>
+        </select>
+      </div>
+    </div>
 
-      <select id="selectDatesFields" ng-model="filterData.select" ng-options="x.value for x in itemsDateSelect track by x.name" ng-dropdown>
-      </select>
+
 
       <div id="datapickerWrapper" class="divWrapper">
 
@@ -63,20 +85,60 @@
         </div>
       </div>
 
-      <div id="selectLangDiv">
-        <select id="selectLang" ng-model="filterData.selectLang" ng-options="x.value for x in itemsLangSelect track by x.name" ng-dropdown>
+    <div class="row">
+      <div id="selectLangDiv" class="col-xs-12 col-md-12 col-sm-12 personalSelector input-group select">
+        <label class="input-group-addon" for="selectDatesFields">
+          Language to search
+        </label>
+        <select id="selectLang" class="form-control" ng-model="filterData.selectLang" ng-options="x.value for x in itemsLangSelect track by x.name" ng-dropdown>
+          <option value="" selected="selected">Choose</option>
         </select>
       </div>
+    </div>
       <!-- SUBMIT BUTTON -->
       <button type="submit" class="btn btn-success btn-lg btn-block">
         <span class="glyphicon glyphicon-flash"></span> Submit!
       </button>
   </form>
+</div>
+<div class="row personalSelector">
+  <div class="col-md-6 col-sm-6 col-xs-6 col-xs-offset-5 col-sm-offset-5 col-md-offset-5">
+    <h4 class="h4">
+      Or type in known ID
+    </h4>
+  </div>
+</div>
+<div class="container">
+  <div class="row personalSelector">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+      <!-- Button trigger modal -->
+      <form ng-submit = "idSpecificSubmit()" role="form">
+        <div class="input-group">
+          <label for="projectId" class="input-group-addon">Known ID</label>
+          <input type="text" ng-model="idSpecific" class="form-control" id="projectId" placeholder="Enter id" />
+        </div>
+        <button type="submit"  class="btn-block btn btn-default personalSelector">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="row personalSelector">
+  <div class="col-md-6 col-sm-6 col-xs-6 col-xs-offset-4 col-sm-offset-4 col-md-offset-4">
+    <h4 class="h4">
+      Or you can update all information and then search
+    </h4>
+  </div>
+</div>
+<div class="container">
+  <div class="row personalSelector">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+      <!-- Button trigger modal -->
+      <form ng-submit = "updateDataInDB()" role="form">
+        <button type="submit"  class="btn-block btn btn-warning personalSelector">Update</button>
+      </form>
+    </div>
+  </div>
   <pre>
-    {{ filterData.select.date }}
-    {{ filterData.select.name }}
-    {{ filterData.slider.minValue }}
-    {{ filterData.slider.maxValue }}
-    {{ filterData.selectLang }}
-</pre>
+    {{updateResp}}
+  </pre>
 </div>

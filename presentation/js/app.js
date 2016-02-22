@@ -20,4 +20,8 @@
                 templateUrl : '/presentation/partials/allOutput.html',
                 controller  : 'multipleOutputController'
             })
+            .when('/notfound/',{
+              templateUrl : '/presentation/partials/notfound.html',
+              controller  : '' 
+            })
     });
