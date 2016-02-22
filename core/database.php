@@ -1,5 +1,6 @@
 <?php
-  class Database{
+  require_once($_SERVER['DOCUMENT_ROOT'] . "core/filters.php");
+  class Database extends Filters{
     /* Variables */
     private $dbc;
     private $columnNames;
@@ -40,21 +41,25 @@
       }
 
     }
-    public function databaseRead($toRead, $tableName,$where = false, $dataWhere = ""){
+    public function databaseRead($toRead, $tableName,$whereCheck, $dataWhere = ""){
       $whereClause = "";
       $dataReturn = array();
-      if($where)
-        $whereClause = $this->databaseReadWhere($dataWhere);
+
+      if($whereCheck == false)
+        $whereClause = $this->databaseReadWhereFilter($dataWhere);
+      if($whereCheck == true)
+        $whereClause = $this->databaseReadWhereId($dataWhere);
 
       $queryString = $this->dbc->prepare($this->databaseReadSelect($tableName,$toRead) . $whereClause);
       $queryString->execute();
-      return $queryString;
+      return( $this->openPDOObject($queryString));
     }
     public function databaseDistinct($toRead, $tableName){
       $queryString = $this->dbc->prepare("SELECT DISTINCT $toRead FROM $tableName");
       $queryString->execute();
       return ($queryString);
     }
+
     private function databaseReadSelect($tableName,$dataToRead){
       $tempString = "";
       for($i = 0; $i < count($dataToRead); $i++){
@@ -64,10 +69,20 @@
       $string = "SELECT $tempString FROM $tableName";
       return $string;
     }
-    private function databaseReadWhere($dataWhere){
-      return " WHERE projectID=" . $dataWhere;
-    }
 
+    private function databaseReadWhereFilter($dataWhere){
+      return " WHERE projectStars BETWEEN '" . $dataWhere["slider"]["minValue"] . "' AND '" . $dataWhere["slider"]["maxValue"] . "' AND projectCreated " . $this->createBetweenFilter($dataWhere["date"]) . " AND language = '" . $dataWhere["lang"] . "'";
+    }
+    private function databaseReadWhereId($dataWhere){
+      return " WHERE projectId = '$dataWhere'";
+    }
+    private function convertKeyValueToArray($dataWhere){
+      $m = array();
+      foreach ($dataWhere as $key => $value) {
+        array_push($m,$value);
+      }
+      return $m;
+    }
     private function creatInsertString($tableName){
       $tempNames = "";
       $tempValues = "";
@@ -115,11 +130,6 @@
       }
       return $arrayOfNames;
     }
-
-
-    /* MISC */
-
-
 
   }
 ?>

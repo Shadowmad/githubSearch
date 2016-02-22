@@ -53,17 +53,17 @@ scotchApp.factory('getFullListByFilter', ['$http','getFilters', function($http, 
     /*this.data = $http.get('/controllers/multipleController.php').then(function(data) {
       return data;
     });*/
+    console.log(this.filter);
     this.data = $http({
       method: "post",
       url: "/controllers/multipleController.php",
       data: this.filter,
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+      headers: {'Content-Type': 'application/json'}
     }).then(function(data){
       return data;
     });
     return this.data;
   };
-
   getFullListByFilterFactory.get = function() {
     return this.data === '' ? this.load() : this.data;
   };
@@ -72,14 +72,16 @@ scotchApp.factory('getFullListByFilter', ['$http','getFilters', function($http, 
 }]);
 
 
-scotchApp.controller("filterController", function($scope,$http,$location, getFilters){
-  $scope.itemsDateSelect =  [
+scotchApp.controller("filterController", function($scope,$http,$location, getFilters, getFullListByFilter){
+$scope.itemsDateSelect =  [
                               {name: 'allDates', value:'Select all dates'},
                               {name: 'beforeDates', value:'Select dates before'},
                               {name: 'afterDates', value:'Select dates after'},
                               {name: 'rangeDates', value:'Select range of dates'},
                             ]
-
+$scope.itemsLangSelect =  [
+                            {name: 'php', value:'PHP'}
+                          ]
 
   $scope.filterData = {};
   $scope.filterData.slider = {
@@ -90,10 +92,10 @@ scotchApp.controller("filterController", function($scope,$http,$location, getFil
       ceil: 50000
     }
   };
-
   var scope = $scope;
   $scope.processForm = function() {
       getFilters.set($scope.filterData);
+      getFullListByFilter.load();
       $location.path("/repos/");
   }
 

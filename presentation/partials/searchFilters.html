@@ -14,14 +14,6 @@
 
 <!-- Code -->
 <script  type="text/javascript">
-
-  /*$('#sandbox-container .input-daterange,#sandbox-container1 .input-daterange,#sandbox-container2 .input-daterange').datepicker({
-        format: "yyyy/mm/dd",
-        endDate: "+Today",
-        autoclose: true,
-        todayHighlight: true
-    });*/
-
     $('body').on('focus',"#sandbox-container .input-daterange,#sandbox-container1 .input-daterange,#sandbox-container2 .input-daterange", function(){
       $(this).datepicker({
             format: "yyyy/mm/dd",
@@ -30,27 +22,6 @@
             todayHighlight: true
         });
     });
-
-
-  /*$("#selectDatesFields").on("change", function(){
-    var q = this.value;
-    $(".visible").children($("input").val(""));
-    $(".visible").removeClass("visible");
-    switch (q) {
-      case "beforeDates":
-        $("#sandbox-container2").addClass("visible");
-        //$("#sandbox-container").removeClass("noneDisplay");
-        break;
-      case "afterDates":
-        $("#sandbox-container1").addClass("visible");
-        break;
-      case "betweenDates":
-        $("#sandbox-container").addClass("visible");
-        break;
-      default:
-
-    }
-  });*/
 </script>
 <div class="searchAll">
   <form ng-submit = "processForm()">
@@ -93,9 +64,7 @@
       </div>
 
       <div id="selectLangDiv">
-        <select id="selectLang">
-          <option value="all"> All Languages </option>
-          <option value="php"> PHP Language </option>
+        <select id="selectLang" ng-model="filterData.selectLang" ng-options="x.value for x in itemsLangSelect track by x.name" ng-dropdown>
         </select>
       </div>
       <!-- SUBMIT BUTTON -->
@@ -108,5 +77,6 @@
     {{ filterData.select.name }}
     {{ filterData.slider.minValue }}
     {{ filterData.slider.maxValue }}
+    {{ filterData.selectLang }}
 </pre>
 </div>
