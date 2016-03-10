@@ -1,5 +1,8 @@
 // create the controller and inject Angular's $scope
 githubLocal.controller('singleOutputController', function($scope,$http,$routeParams, $location) {
+    $scope.template = {
+      "issues" : "presentation/partials/issues.html"
+    };
     $http.get("/controllers/singleIdController.php?id=" + $routeParams.id + "&single=true")
     .then(function(responce){
         if(responce.data.records == ""){
@@ -27,6 +30,8 @@ githubLocal.controller('multipleOutputController', function($scope,$location,get
     });
 
 });
+
+
 
 githubLocal.factory('getFilters', [function(){
   var getFiltersFactory = {};

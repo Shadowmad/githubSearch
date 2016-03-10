@@ -1,5 +1,5 @@
 <?php
-  require_once($_SERVER['DOCUMENT_ROOT'] . "core/filters.php");
+  require_once($_SERVER['DOCUMENT_ROOT'] . "/core/filters.php");
   class Database extends Filters{
     /* Variables */
     private $dbc;
@@ -23,7 +23,7 @@
     }
 
     public function databaseInsert($toInsertData, $tableName){
-      $this->columnNames = $this->columnsNamesFetching();
+      $this->columnNames = $this->columnsNamesFetching($tableName);
       $this->countColumnNames = count($this->columnNames);
       $queryString = $this->creatInsertString($tableName) ." ". $this->createOnUpdateString();
 
@@ -109,8 +109,8 @@
 
       return $string;
     }
-    private function getTableColumns(){
-      $query = "SHOW COLUMNS FROM reposTable";
+    private function getTableColumns($tableName){
+      $query = "SHOW COLUMNS FROM $tableName";
       $result = $this->dbc->prepare($query);
       try {
         $result->execute();
@@ -119,9 +119,9 @@
       }
       return $result;
     }
-    private function columnsNamesFetching(){
+    private function columnsNamesFetching($tableName){
       $arrayOfNames = array();
-      $resultNames = $this->getTableColumns();
+      $resultNames = $this->getTableColumns($tableName);
 
       foreach ($resultNames as $key => $value) {
         if($value["Extra"] == "auto_increment")

@@ -1,8 +1,8 @@
 <?php
-  require_once($_SERVER['DOCUMENT_ROOT'] . "core/database.php");
+  require_once($_SERVER['DOCUMENT_ROOT'] . "/core/database.php");
   $connector = new Database();
 
-  @$_POST = json_decode(file_get_contents('php://input'), true);
+  $_POST = json_decode(file_get_contents('php://input'), true);
   $maxValueStars = (isset($_POST["slider"]["maxValue"]) ? $_POST["slider"]["maxValue"] : "0");
   $minValueStars = (isset($_POST["slider"]["minValue"]) ? $_POST["slider"]["minValue"] : "50000");
   $lang = (isset($_POST["selectLang"]["name"]) ? $_POST["selectLang"]["name"] : "php");
